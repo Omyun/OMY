@@ -5,20 +5,20 @@ import time
 import colorama
 import urllib.parse
 
-æ‰€æœ‰åŒ…å«çš„å¤–éƒ¨åº“æ–‡ä»¶
+ËùÓĞ°üº¬µÄÍâ²¿¿âÎÄ¼ş
 class Mysql
-    db_listæ•°æ®åº“é…ç½® #lib.db_listè°ƒç”¨
-    run_sql(sql) è¿è¡Œsqlè¯­å¥ã€‚ #ä¸è¿”å›ç»“æœ
-	run_sql_beark(sql) è¿è¡Œsqlè¯­å¥è¿”å›æŸ¥è¯¢ç»“æœ
+    db_listÊı¾İ¿âÅäÖÃ #lib.db_listµ÷ÓÃ
+    run_sql(sql) ÔËĞĞsqlÓï¾ä¡£ #²»·µ»Ø½á¹û
+	run_sql_beark(sql) ÔËĞĞsqlÓï¾ä·µ»Ø²éÑ¯½á¹û
 
 class Url
-	url_code(list) æŠŠå…ƒç»„å­˜å…¥ï¼Œè¿”å›urlç¼–ç æœºæ„åçš„æ•°æ® {"aa":"bb","cc":123} è¿”å› aa=bb&cc=123
-	str_pure(str) æŠŠstrå­—ç¬¦ä¸²æ ¼å¼åŒ–å»æ‰ç‰¹æ®Šç¬¦å·ã€‚è¿”å›æ ¼å¼åŒ–åçš„ç»“æœ ["'","ï¼ˆ","ï¼‰","\\","*","|","/","-",";"]
+	url_code(list) °ÑÔª×é´æÈë£¬·µ»Øurl±àÂë»ú¹¹ºóµÄÊı¾İ {"aa":"bb","cc":123} ·µ»Ø aa=bb&cc=123
+	str_pure(str) °Ñstr×Ö·û´®¸ñÊ½»¯È¥µôÌØÊâ·ûºÅ¡£·µ»Ø¸ñÊ½»¯ºóµÄ½á¹û ["'","£¨","£©","\\","*","|","/","-",";"]
 
 class Web
-	GET(url,head,pro) 3ä¸ªå‚æ•°åˆ†åˆ«ä¸ºurlï¼Œheadå¤´éƒ¨ï¼Œproæ˜¯å¦ä»£ç†ï¼Œä¸ä½¿ç”¨ä»£ç†ä¼ 0ï¼Œä½¿ç”¨ä»£ç†ä¼ æœ¬åœ°ä»£ç†çš„ç«¯å£å·
-	POST(url,head,data,pro) æ¯”getå¤šä¸€ä¸ªpost data,éœ€è¦postæäº¤çš„æ•°æ®ä»è¿™é‡Œä¼ å…¥ã€‚
-	download_img(url,file) ä¸‹è½½å›¾ç‰‡ï¼Œurl,å­˜æ”¾è·¯å¾„(éœ€è¦åŒ…å«æ–‡ä»¶å)
-	download_video(url,file) ä¸‹è½½è§†é¢‘ å¦‚ä¸Š
+	GET(url,head,pro) 3¸ö²ÎÊı·Ö±ğÎªurl£¬headÍ·²¿£¬proÊÇ·ñ´úÀí£¬²»Ê¹ÓÃ´úÀí´«0£¬Ê¹ÓÃ´úÀí´«±¾µØ´úÀíµÄ¶Ë¿ÚºÅ
+	POST(url,head,data,pro) ±Èget¶àÒ»¸öpost data,ĞèÒªpostÌá½»µÄÊı¾İ´ÓÕâÀï´«Èë¡£
+	download_img(url,file) ÏÂÔØÍ¼Æ¬£¬url,´æ·ÅÂ·¾¶(ĞèÒª°üº¬ÎÄ¼şÃû)
+	download_video(url,file) ÏÂÔØÊÓÆµ ÈçÉÏ
 class heart:
-	run_heart("lib\open.txt",20,"close.txt") #ä¸€ä¸ªç®€æ˜“çš„å¿ƒè·³ç›‘æµ‹ 
+	run_heart("lib\open.txt",20,"close.txt") #Ò»¸ö¼òÒ×µÄĞÄÌø¼à²â 
