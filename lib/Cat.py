@@ -4,9 +4,10 @@ import pymysql
 import time
 import colorama
 import urllib.parse
+import base64
 colorama.init(autoreset=True)
 lettime = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-requests.packages.urllib3.disable_warnings() #抑制ssl错误
+#requests.packages.urllib3.disable_warnings() #抑制ssl错误
 
 db_list ={
     "localhost":"127.0.0.1",
@@ -48,12 +49,20 @@ class Url:
         for self.key in self.list:
             self.tempr = self.tempr.replace(self.key, " ")
         return str(self.tempr)
+    def base64x(self,strx,code):
+        self.data = ""
+        if code ==1:
+            self.data = base64.b64encode(bytes(strx.encode('utf-8')))
+        if code ==2:
+            self.data = base64.b64decode(strx)
+        self.data = self.data.decode("utf-8")
+        return str(self.data)
 
 class Web:
     def GET(self,url,head,pro):
         if pro!=0:
             self.proxies = {'http': 'http://localhost:'+pro, 'https':'http://localhost:'+pro}
-            self.httpdata = requests.get(url,headers=head,verify=False,proxies=proxies)
+            self.httpdata = requests.get(url,headers=head,verify=False,proxies=self.proxies)
         else:
             self.httpdata = requests.get(url,headers=head,verify=False)
         return self.httpdata.text
@@ -61,14 +70,14 @@ class Web:
     def POST(self,url,head,data,pro):
         if pro!=0:
             self.proxies = {'http': 'http://localhost:'+pro, 'https':'http://localhost:'+pro}
-            self.httpdata = requests.post(url,headers=head,data=data,verify=False,proxies=proxies)
+            self.httpdata = requests.post(url,headers=head,data=data,verify=False,proxies=self.proxies)
         else:
             self.httpdata = requests.post(url,headers=head,data=data,verify=False)
         return self.httpdata.text
 
     def download_img(self,url,file):
         self.r = requests.get(url, stream=True)
-        self.status = r.status_code 
+        self.status = self.r.status_code 
         if self.status == 200:
             open(str(file), 'wb').write(self.r.content) # 将内容输出到文件
         del self.r
@@ -85,7 +94,6 @@ class Web:
 class heart:
     #run_heart("lib\open.txt",20,"close.txt")
     def run_heart(self,filex):#心跳
-
         self.tims = str(time.time())#时间戳心跳包
         self.filename = filex
         with open(self.filename, 'w') as self.file_object:
@@ -95,15 +103,15 @@ class heart:
         with open(self.filename, 'w+') as self.file_object:
             self.file_object.write(str(text))
 
-    def run_heart(self,filex,nx,jg): #监测的文件，判定掉线的次数，一次为3秒推荐20次(60秒)，结果输出文件
+    def run_heart_see(self,filec,nx,jg): #监测的文件，判定掉线的次数，一次为3秒推荐20次(60秒)，结果输出文件
         self.rk = ""
         self.n = 1
-        self.f = open(filex,'r')
+        self.f = open(filec,'r')
         self.rk = str(self.f.read())
         self.f.close
         self.wlop("open",jg) #初始化结果状态
         while True:    
-            self.f = open(filex,'r')
+            self.f = open(filec,'r')
             self.rks = str(self.f.read())
             
             if self.rk == self.rks:
@@ -114,7 +122,7 @@ class heart:
                 print("\033[32m[心跳]",self.rks)
             self.rk = self.rks
             self.f.close
-            if self.n > self.nx:
+            if self.n > nx:
                 print("\033[31m[进程结束]判定无心跳")
                 self.wlop("close",jg) #修改结果状态
                 exit()            
